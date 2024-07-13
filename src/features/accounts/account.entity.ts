@@ -9,22 +9,22 @@ import {
 @Entity()
 class Account {
   @PrimaryGeneratedColumn()
-  public id: number;
+  id: number;
 
   @Column()
-  public email: string;
+  email: string;
 
   @Column()
-  private password: string;
+  password: string;
 
   @Column()
-  public fullname: string;
+  fullname: string;
 
   @CreateDateColumn()
-  public createdAt: Date;
+  created_at: Date;
 
   @UpdateDateColumn()
-  public updatedAt: Date;
+  updated_at: Date;
 }
 
 export default Account;
