@@ -10,7 +10,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       isGlobal: true,
       imports: [ConfigModule],
       inject: [ConfigService],
-      store: redisStore,
       useFactory: (configService: ConfigService) => ({
         store: redisStore,
         host: configService.get('REDIS_HOST'),
