@@ -6,6 +6,10 @@ import { AccountsService } from 'src/features/accounts/accounts.service';
 export class AuthService {
   constructor(private readonly accountsService: AccountsService) {}
 
+  login() {
+    return this.accountsService.login();
+  }
+
   register(registerData: RegisterDto) {
     return this.accountsService.createAccount(registerData);
   }
