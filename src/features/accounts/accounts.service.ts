@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import Account from './account.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { RegisterDto } from 'src/auth/dto/register.dto';
+import { RegisterDto } from 'src/features/auth/auth.dto';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Cache } from 'cache-manager';
 import { PasswordService } from './password.service';
@@ -23,16 +23,17 @@ export class AccountsService {
     return false;
   }
 
-  async createAccount({ fullname, email, password }: RegisterDto) {
+  async createAccount({
+    fullname,
+    email,
+    password,
+  }: RegisterDto): Promise<Account> {
     const hash = await this.passwordService.hashPassword(password);
 
-    // const account = await this.accountsRepository.create({
-    //   fullname,
-    //   email,
-    //   password: hash,
-    // });
-    // await this.accountsRepository.save(account);
-    // return account;
-    return hash;
+    return await this.accountsRepository.save({
+      fullname,
+      email,
+      password: hash,
+    });
   }
 }

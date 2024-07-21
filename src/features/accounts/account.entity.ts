@@ -1,16 +1,8 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { BaseEntity } from 'src/database/base.entity';
+import { Column, Entity } from 'typeorm';
 
 @Entity()
-class Account {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+class Account extends BaseEntity {
   @Column()
   email: string;
 
@@ -19,12 +11,6 @@ class Account {
 
   @Column()
   fullname: string;
-
-  @CreateDateColumn()
-  created_at: Date;
-
-  @UpdateDateColumn()
-  updated_at: Date;
 }
 
 export default Account;
