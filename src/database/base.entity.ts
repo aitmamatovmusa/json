@@ -9,8 +9,8 @@ export class BaseEntity {
   id: string;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updatedAt: Date;
 
   @CreateDateColumn()
-  created_at: Date;
+  createdAt: Date;
 }
