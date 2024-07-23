@@ -25,6 +25,8 @@ export class AppModule implements NestModule {
       },
     });
 
+    await redisClient.connect();
+
     const redisStore = new RedisStore({ client: redisClient });
 
     consumer
@@ -38,6 +40,10 @@ export class AppModule implements NestModule {
             maxAge: 3600000,
           },
         }),
+        (req, res, next) => {
+          req.session.save();
+          next();
+        },
       )
       .forRoutes('*');
   }
