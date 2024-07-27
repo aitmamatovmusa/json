@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { RegisterDto } from './auth.dto';
 import { AccountsService } from 'src/features/accounts/accounts.service';
+import { Session } from 'express-session';
 
 @Injectable()
 export class AuthService {
@@ -10,7 +11,17 @@ export class AuthService {
     return this.accountsService.login();
   }
 
-  register(registerData: RegisterDto) {
-    return this.accountsService.createAccount(registerData);
+  async register(registerData: RegisterDto, session: Session) {
+    const userAccount = await this.accountsService.findAccountByEmail(
+      registerData.email,
+    );
+    if (userAccount) {
+      return {
+        error: 'User with this email already exists',
+      };
+    }
+
+    await this.accountsService.createAccount(registerData);
+    session.save();
   }
 }

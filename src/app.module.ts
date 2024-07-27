@@ -40,10 +40,6 @@ export class AppModule implements NestModule {
             maxAge: 3600000,
           },
         }),
-        (req, res, next) => {
-          req.session.save();
-          next();
-        },
       )
       .forRoutes('*');
   }

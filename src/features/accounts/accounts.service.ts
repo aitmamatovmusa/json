@@ -23,6 +23,10 @@ export class AccountsService {
     return false;
   }
 
+  async findAccountByEmail(email: string): Promise<Account> {
+    return await this.accountsRepository.findOne({ where: { email } });
+  }
+
   async createAccount({
     fullname,
     email,
