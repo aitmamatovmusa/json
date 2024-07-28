@@ -28,8 +28,8 @@ export class AuthService {
       throw new WrongPasswordException();
     }
 
-    // session.save();
-    // return { token: session.id };
+    session.save();
+    return { token: session.id };
   }
 
   async register(registerData: RegisterDto, session: Session) {
