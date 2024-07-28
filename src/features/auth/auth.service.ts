@@ -6,6 +6,7 @@ import { PasswordService } from '../accounts/password.service';
 import { UserNotFoundException } from 'src/common/filters/userNotFound.filter';
 import { WrongPasswordException } from 'src/common/filters/wrongPassword.filter';
 import { UserAlreadyExistsException } from 'src/common/filters/userAlreadyExists.filter';
+import { LoginResponse } from './types';
 
 @Injectable()
 export class AuthService {
@@ -14,7 +15,10 @@ export class AuthService {
     private readonly passwordService: PasswordService,
   ) {}
 
-  async login({ email, password }: LoginDto, session: Session) {
+  async login(
+    { email, password }: LoginDto,
+    session: Session,
+  ): Promise<LoginResponse> {
     const userAccount = await this.accountsService.findAccountByEmail(email);
     if (!userAccount) {
       throw new UserNotFoundException();
@@ -32,7 +36,7 @@ export class AuthService {
     return { token: session.id };
   }
 
-  async register(registerData: RegisterDto, session: Session) {
+  async register(registerData: RegisterDto, session: Session): Promise<void> {
     const userAccount = await this.accountsService.findAccountByEmail(
       registerData.email,
     );

@@ -37,7 +37,7 @@ export class PasswordService {
     });
   }
 
-  async comparePasswords({ storedHash, password }) {
+  async comparePasswords({ storedHash, password }): Promise<boolean> {
     const passwordHash = await this.hashPassword(password);
     return passwordHash === storedHash;
   }
