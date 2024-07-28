@@ -4,6 +4,7 @@ import { AccountsService } from 'src/features/accounts/accounts.service';
 import { Session } from 'express-session';
 import { PasswordService } from '../accounts/password.service';
 import { UserNotFoundException } from 'src/common/filters/userNotFound.filter';
+import { WrongPasswordException } from 'src/common/filters/wrongPassword.filter';
 
 @Injectable()
 export class AuthService {
@@ -23,9 +24,7 @@ export class AuthService {
       storedHash: userAccount.password,
     });
     if (!match) {
-      return {
-        error: 'Password is wrong',
-      };
+      throw new WrongPasswordException();
     }
 
     // session.save();
