@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import Account from 'src/features/accounts/account.entity';
+import { AppConfig } from './appConfig/appConfig.entity';
 
 @Module({
   imports: [
@@ -15,10 +16,11 @@ import Account from 'src/features/accounts/account.entity';
         username: configService.get<string>('DATABASE_USERNAME'),
         password: configService.get<string>('DATABASE_PASSWORD'),
         database: configService.get<string>('DATABASE_NAME'),
-        entities: [Account],
+        entities: [AppConfig, Account],
         synchronize: false,
       }),
     }),
+    ConfigModule,
   ],
 })
 export class DatabaseModule {}

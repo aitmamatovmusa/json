@@ -8,9 +8,16 @@ import { RedisModule } from './database/redis/redis.module';
 import * as session from 'express-session';
 import RedisStore from 'connect-redis';
 import { createClient } from 'redis';
+import { AppConfigModule } from './database/appConfig/appConfig.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), RedisModule, DatabaseModule, AuthModule],
+  imports: [
+    ConfigModule.forRoot(),
+    AppConfigModule,
+    RedisModule,
+    DatabaseModule,
+    AuthModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

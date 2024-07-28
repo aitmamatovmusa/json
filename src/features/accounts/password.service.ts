@@ -1,16 +1,18 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { pbkdf2, randomBytes } from 'crypto';
+import { pbkdf2 } from 'crypto';
+import { AppConfigService } from 'src/database/appConfig/appConfig.service';
 
 @Injectable()
 export class PasswordService {
-  private saltLength: number;
   private iterations: number;
   private keylen: number;
   private digest: string;
 
-  constructor(private configService: ConfigService) {
-    this.saltLength = parseInt(this.configService.get<string>('SALT_LENGTH'));
+  constructor(
+    private configService: ConfigService,
+    @Inject() private appConfigService: AppConfigService,
+  ) {
     this.iterations = parseInt(
       this.configService.get<string>('HASH_ITERATIONS'),
     );
@@ -18,11 +20,8 @@ export class PasswordService {
     this.digest = this.configService.get<string>('HASH_DIGEST');
   }
 
-  async hashPassword(
-    password: string,
-    salt?: string | undefined,
-  ): Promise<string> {
-    const passwordSalt = salt ?? this.generateSalt();
+  async hashPassword(password: string): Promise<string> {
+    const passwordSalt = await this.appConfigService.getSalt();
     return new Promise((resolve, reject) => {
       pbkdf2(
         password,
@@ -38,7 +37,8 @@ export class PasswordService {
     });
   }
 
-  generateSalt(): string {
-    return randomBytes(this.saltLength).toString('hex');
+  async comparePasswords({ storedHash, password }) {
+    const passwordHash = await this.hashPassword(password);
+    return passwordHash === storedHash;
   }
 }
