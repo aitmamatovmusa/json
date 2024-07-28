@@ -5,6 +5,7 @@ import { Session } from 'express-session';
 import { PasswordService } from '../accounts/password.service';
 import { UserNotFoundException } from 'src/common/filters/userNotFound.filter';
 import { WrongPasswordException } from 'src/common/filters/wrongPassword.filter';
+import { UserAlreadyExistsException } from 'src/common/filters/userAlreadyExists.filter';
 
 @Injectable()
 export class AuthService {
@@ -36,9 +37,7 @@ export class AuthService {
       registerData.email,
     );
     if (userAccount) {
-      return {
-        error: 'User with this email already exists',
-      };
+      throw new UserAlreadyExistsException();
     }
 
     await this.accountsService.createAccount(registerData);
