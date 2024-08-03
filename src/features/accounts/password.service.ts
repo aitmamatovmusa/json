@@ -20,6 +20,11 @@ export class PasswordService {
     this.digest = this.configService.get<string>('HASH_DIGEST');
   }
 
+  async comparePasswords({ storedHash, password }): Promise<boolean> {
+    const passwordHash = await this.hashPassword(password);
+    return passwordHash === storedHash;
+  }
+
   async hashPassword(password: string): Promise<string> {
     const passwordSalt = await this.appConfigService.getSalt();
     return new Promise((resolve, reject) => {
@@ -35,10 +40,5 @@ export class PasswordService {
         },
       );
     });
-  }
-
-  async comparePasswords({ storedHash, password }): Promise<boolean> {
-    const passwordHash = await this.hashPassword(password);
-    return passwordHash === storedHash;
   }
 }
