@@ -1,5 +1,3 @@
-interface LoginResponse {
+export interface LoginResponse {
   token: string;
 }
-
-export { LoginResponse };
