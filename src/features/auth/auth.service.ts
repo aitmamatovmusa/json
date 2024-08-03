@@ -24,11 +24,11 @@ export class AuthService {
       throw new UserNotFoundException();
     }
 
-    const match = await this.passwordService.comparePasswords({
+    const isPasswordValid = await this.passwordService.comparePasswords({
       password,
       storedHash: userAccount.password,
     });
-    if (!match) {
+    if (!isPasswordValid) {
       throw new WrongPasswordException();
     }
 
