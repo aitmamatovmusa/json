@@ -4,9 +4,9 @@ import Account from './account.entity';
 import { AccountsController } from './accounts.controller';
 import { AccountsService } from './accounts.service';
 import { PasswordService } from './password.service';
-
-import { AppConfigModule } from 'src/database/appConfig/appConfig.module';
 import { ConfigModule } from '@nestjs/config';
+import { AppConfigModule } from 'src/database/appConfig';
+
 @Module({
   imports: [ConfigModule, AppConfigModule, TypeOrmModule.forFeature([Account])],
   controllers: [AccountsController],

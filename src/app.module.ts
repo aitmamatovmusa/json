@@ -6,7 +6,7 @@ import { RedisModule } from './database/redis/redis.module';
 import * as session from 'express-session';
 import RedisStore from 'connect-redis';
 import { createClient } from 'redis';
-import { AppConfigModule } from './database/appConfig/appConfig.module';
+import { AppConfigModule } from './database/appConfig';
 
 @Module({
   imports: [
