@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Author } from 'src/author/author.entity';
+import { Author } from 'src/features/author/author.entity';
 import Account from 'src/features/accounts/account.entity';
 import { Config } from './appConfig/config.entity';
 
