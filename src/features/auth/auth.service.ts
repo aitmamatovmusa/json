@@ -32,6 +32,7 @@ export class AuthService {
       throw new WrongPasswordException();
     }
 
+    (session as any).news = '';
     session.save();
     return { token: session.id };
   }

@@ -6,7 +6,9 @@ import { RedisModule } from './database/redis/redis.module';
 import * as session from 'express-session';
 import RedisStore from 'connect-redis';
 import { createClient } from 'redis';
-import { AppConfigModule } from './database/appConfig/appConfig.module';
+import { AppConfigModule } from './database/appConfig';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from './features/auth/auth.guard';
 
 @Module({
   imports: [
@@ -17,7 +19,7 @@ import { AppConfigModule } from './database/appConfig/appConfig.module';
     AuthModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [{ provide: APP_GUARD, useClass: AuthGuard }],
 })
 export class AppModule implements NestModule {
   constructor(private readonly configService: ConfigService) {}

@@ -10,12 +10,14 @@ import { LoginDto, RegisterDto } from './auth.dto';
 import { AuthService } from './auth.service';
 import { Session as SessionType } from 'express-session';
 import { LoginResponse } from './types';
+import { Public } from './auth.decorator';
 
 @Controller('auth')
 export class AuthContoller {
   constructor(private readonly authService: AuthService) {}
 
   @Post('login')
+  @Public()
   @HttpCode(HttpStatus.OK)
   login(
     @Body() loginData: LoginDto,
@@ -25,6 +27,7 @@ export class AuthContoller {
   }
 
   @Post('register')
+  @Public()
   register(
     @Body() registerData: RegisterDto,
     @Session() session: SessionType,

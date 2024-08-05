@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { AppConfig } from './appConfig.entity';
+import { Config } from './config.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
 export class AppConfigService {
   constructor(
-    @InjectRepository(AppConfig)
-    private readonly appConfigRepository: Repository<AppConfig>,
+    @InjectRepository(Config)
+    private readonly appConfigRepository: Repository<Config>,
   ) {}
 
   async getSalt(): Promise<string> {
