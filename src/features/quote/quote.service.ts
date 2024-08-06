@@ -27,7 +27,7 @@ export class QuoteService {
       return new Promise((resolve) => {
         setTimeout(() => {
           resolve({ authorId, quoteId, quote });
-        }, 0);
+        }, 5000);
       });
     } catch {
       throw new InvalidAuthorIdException();
