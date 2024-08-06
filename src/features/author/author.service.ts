@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Author } from './author.entity';
 import { Repository } from 'typeorm';
+import { delayResponse } from 'src/common/utils/delay';
 
 @Injectable()
 export class AuthorService {
@@ -23,8 +24,6 @@ export class AuthorService {
       .take(1)
       .getOne();
 
-    return new Promise((resolve) => {
-      setTimeout(() => resolve({ authorId: id, name: fullname }), 5000);
-    });
+    return await delayResponse({ authorId: id, name: fullname });
   }
 }
