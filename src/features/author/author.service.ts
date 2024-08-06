@@ -10,7 +10,7 @@ export class AuthorService {
     private readonly authorRepository: Repository<Author>,
   ) {}
 
-  async getAuthor() {
+  async getRandomAuthor() {
     const count = await this.authorRepository.count();
     if (count === 0) {
       return null;

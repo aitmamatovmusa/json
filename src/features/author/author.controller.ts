@@ -6,7 +6,7 @@ export class AuthorController {
   constructor(private readonly authorService: AuthorService) {}
 
   @Get()
-  async getAuthorInfo() {
-    return await this.authorService.getAuthor();
+  async getRandomAuthorInfo() {
+    return await this.authorService.getRandomAuthor();
   }
 }
