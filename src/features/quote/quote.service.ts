@@ -4,6 +4,7 @@ import { MissingAuthorIdException } from 'src/common/filters/missingAuthorIdExce
 import { Quote } from './quote.entity';
 import { Repository } from 'typeorm';
 import { InvalidAuthorIdException } from 'src/common/filters/invalidAuthorId.filter';
+import { delayResponse } from 'src/common/utils/delay';
 
 @Injectable()
 export class QuoteService {
@@ -24,11 +25,8 @@ export class QuoteService {
         .orderBy('RANDOM()')
         .limit(1)
         .getOne();
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          resolve({ authorId, quoteId, quote });
-        }, 5000);
-      });
+
+      return await delayResponse({ authorId, quoteId, quote });
     } catch {
       throw new InvalidAuthorIdException();
     }
