@@ -9,7 +9,7 @@ import { createClient } from 'redis';
 import { AppConfigModule } from './database/appConfig';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './features/auth/auth.guard';
-
+import { AuthorModule } from './features/author/author.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -17,6 +17,7 @@ import { AuthGuard } from './features/auth/auth.guard';
     RedisModule,
     DatabaseModule,
     AuthModule,
+    AuthorModule,
   ],
   controllers: [],
   providers: [{ provide: APP_GUARD, useClass: AuthGuard }],
