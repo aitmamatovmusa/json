@@ -10,6 +10,8 @@ import { AppConfigModule } from './database/appConfig';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './features/auth/auth.guard';
 import { AuthorModule } from './features/author/author.module';
+import { QuoteModule } from './features/quote/quote.module';
+
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -18,6 +20,7 @@ import { AuthorModule } from './features/author/author.module';
     DatabaseModule,
     AuthModule,
     AuthorModule,
+    QuoteModule,
   ],
   controllers: [],
   providers: [{ provide: APP_GUARD, useClass: AuthGuard }],
