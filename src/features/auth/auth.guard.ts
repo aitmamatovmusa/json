@@ -8,6 +8,7 @@ import {
 import { Reflector } from '@nestjs/core';
 import { Cache } from 'cache-manager';
 import { IS_PUBLIC_KEY } from './auth.decorator';
+import { buildSessionId } from 'src/common/utils/session';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -27,7 +28,7 @@ export class AuthGuard implements CanActivate {
       return true;
     }
 
-    const sessionId = `sess:${request.session.id}`;
+    const sessionId = buildSessionId(request.session.id);
     const cacheSessionId = await this.cacheManager.get(sessionId);
     return cacheSessionId ? true : false;
   }
