@@ -11,6 +11,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './features/auth/auth.guard';
 import { AuthorModule } from './features/author/author.module';
 import { QuoteModule } from './features/quote/quote.module';
+import { InfoModule } from './features/info/info.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { QuoteModule } from './features/quote/quote.module';
     AuthModule,
     AuthorModule,
     QuoteModule,
+    InfoModule,
   ],
   controllers: [],
   providers: [{ provide: APP_GUARD, useClass: AuthGuard }],

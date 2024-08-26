@@ -1,12 +1,11 @@
 import { Controller, Get } from '@nestjs/common';
+import { Public } from '../auth/auth.decorator';
 
 @Controller('info')
 export class InfoController {
   @Get()
+  @Public()
   getInfo() {
-    return {
-      success: true,
-      data: { info: 'Some information about the <b>company</b>.' },
-    };
+    return { info: 'Some information about the company.' };
   }
 }
