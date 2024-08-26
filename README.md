@@ -6,7 +6,7 @@ This repository features a backend JSON API service built with Nest.js and Postg
 
 - **User Authentication**: Secure user registration and login using session tokens.
 - **Session Management**: Protects API endpoints with session-based authentication.
-- **Data Endpoints**: Fetches public information, user profiles, authors, and quotes.
+- **Data Endpoints**: Fetches public information, authors, and quotes.
 
 ### Getting Started
 
@@ -63,7 +63,6 @@ This repository features a backend JSON API service built with Nest.js and Postg
 - **GET /info**: Returns public information.
 - **POST /register**: Registers a new user.
 - **POST /login**: Logs in a user and returns a session token.
-- **GET /profile**: Returns the user’s profile (requires authentication).
 - **GET /author**: Returns random author info (requires authentication).
 - **GET /quote**: Returns a random quote (requires authentication).
 - **DELETE /logout**: Logs out the user.
